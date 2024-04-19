@@ -12,7 +12,7 @@ const AuthLayout = async ({ children }: { children: React.ReactNode }) => {
     <div
       className={clsx(
         styles.container,
-        "2xl:py-[80px] xl:py-[50px] lg:py-[30px] py-[15px] px-[15px]"
+        "2xl:py-[80px] xl:py-[50px] lg:py-[30px] py-[15px] px-[15px] bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-sky-400 from-0% to-blue-800 to-70%"
       )}
     >
       {children}
