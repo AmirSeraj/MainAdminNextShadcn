@@ -3,15 +3,19 @@ import { getSession } from "@/lib/actions";
 import { FaUserShield } from "react-icons/fa";
 import Image from "next/image";
 import React from "react";
+import CloseSidebar from "./CloseSidebar";
 
-const SidebarHeader = async () => {
+const SidebarHeader = async ({ siteName }: { siteName: string }) => {
   const session = await getSession();
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex gap-2 items-center">
-        <SiteIcon />
-        <p className="text-small font-bold uppercase text-[#ecedee]">Acme</p>
+    <div className="flex flex-col gap-2 mb-2 p-4">
+      <div className="flex justify-between items-center">
+        <div className="flex gap-2 items-center">
+          <SiteIcon />
+          <p className="text-small font-bold uppercase">{siteName}</p>
+        </div>
+        <CloseSidebar />
       </div>
       <div className="flex gap-2 items-center">
         {session?.user?.image ? (
@@ -24,7 +28,7 @@ const SidebarHeader = async () => {
         ) : (
           <FaUserShield size={30} className="ml-2" />
         )}
-        <p className="capitalize text-white font-thin">{session?.user?.name}</p>
+        <p className="capitalize">{session?.user?.name}</p>
       </div>
     </div>
   );
