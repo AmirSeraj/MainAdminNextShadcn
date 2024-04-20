@@ -1,12 +1,16 @@
-'use client'
-import { RiMenuFoldLine } from "react-icons/ri";
+"use client";
+import { RiMenuFoldLine, RiMenuUnfoldLine } from "react-icons/ri";
 import { useToggleSidebar } from "@/components/hooks/useSidebar";
 
-const CloseSidebar = () => {
+const CloseSidebar = ({ locale }: { locale: string }) => {
   const { toggleSidebar } = useToggleSidebar();
   return (
     <div className="lg:hidden block cursor-pointer" onClick={toggleSidebar}>
-      <RiMenuFoldLine size={22} />
+      {locale === "fa" ? (
+        <RiMenuUnfoldLine size={22} />
+      ) : (
+        <RiMenuFoldLine size={22} />
+      )}
     </div>
   );
 };

@@ -6,7 +6,7 @@ import SidebarContainer from "./SidebarContainer";
 const Sidebar = ({ locale }: { locale: string }) => {
   return (
     <SidebarContainer locale={locale}>
-      <SidebarHeader siteName="Acme" />
+      <SidebarHeader siteName="Acme" locale={locale} />
       <SidebarMain locale={locale} />
       <SidebarFooter locale={locale} />
     </SidebarContainer>

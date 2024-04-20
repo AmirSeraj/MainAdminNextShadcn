@@ -5,17 +5,23 @@ import Image from "next/image";
 import React from "react";
 import CloseSidebar from "./CloseSidebar";
 
-const SidebarHeader = async ({ siteName }: { siteName: string }) => {
+const SidebarHeader = async ({
+  siteName,
+  locale,
+}: {
+  siteName: string;
+  locale: string;
+}) => {
   const session = await getSession();
 
   return (
-    <div className="flex flex-col gap-2 mb-2 p-4">
+    <div className="flex flex-col gap-2 mb-2 py-1 px-4">
       <div className="flex justify-between items-center">
         <div className="flex gap-2 items-center">
           <SiteIcon />
           <p className="text-small font-bold uppercase">{siteName}</p>
         </div>
-        <CloseSidebar />
+        <CloseSidebar locale={locale} />
       </div>
       <div className="flex gap-2 items-center">
         {session?.user?.image ? (

@@ -1,45 +1,54 @@
-import { MdDashboard, MdSupervisedUserCircle, MdArticle, MdGroups } from "react-icons/md";
+import {
+  MdDashboard,
+  MdSupervisedUserCircle,
+  MdArticle,
+  MdGroups,
+} from "react-icons/md";
 import { ImProfile } from "react-icons/im";
 
-export const MenuItems = [
-  {
-    title: "Pages",
-    list: [
-      {
-        title: "Dashboard",
-        path: "/dashboard",
-        icon: <MdDashboard />,
-      },
-      {
-        title: "Users",
-        path: "/dashboard/users",
-        icon: <MdSupervisedUserCircle />,
-      },
-      {
-        title: "Articles",
-        path: "/dashboard/articles",
-        icon: <MdArticle />,
-      },
-    ],
-  },
-  {
-    title: "Analytics",
-    list: [
-      {
-        title: "Teams",
-        path: "/dashboard/teams",
-        icon: <MdGroups />,
-      },
-    ],
-  },
-  {
-    title: "User",
-    list: [
-      {
-        title: "Profile",
-        path: "/dashboard/profile",
-        icon: <ImProfile />,
-      },
-    ],
-  },
-];
+const MenuItems = (t) => {
+  return [
+    {
+      title: t("pages"),
+      list: [
+        {
+          title: t("dashboard"),
+          path: "/dashboard",
+          icon: <MdDashboard />,
+        },
+        {
+          title: t("users"),
+          path: "/dashboard/users",
+          icon: <MdSupervisedUserCircle />,
+        },
+        {
+          title: t("articles"),
+          path: "/dashboard/articles",
+          icon: <MdArticle />,
+        },
+      ],
+    },
+    {
+      title: t("analytics"),
+      list: [
+        {
+          title: t("teams"),
+          path: "/dashboard/teams",
+          icon: <MdGroups />,
+        },
+      ],
+    },
+    {
+      title: t("user"),
+      list: [
+        {
+          title: t("profile"),
+          path: "/dashboard/profile",
+          icon: <ImProfile />,
+        },
+      ],
+    },
+  ];
+};
+
+export default MenuItems;

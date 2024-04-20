@@ -12,14 +12,15 @@ const SidebarContainer = ({
   locale: string;
 }) => {
   const { sidebarVisible } = useToggleSidebar();
-  console.log("sidebarVisible", locale);
   return (
     <div
       className={clsx(
         styles.container,
-        "flex bg-gradient-to-b from-[#dcdcec] via-[#b96a86] to-[#9154ce] dark:from-[#52525c] dark:via-[#5f0726] dark:to-[#301051] sm:p-2 p-1",
-        // locale === 'en' && (sidebarVisible ? "translate-x-0" : "-translate-x-full"),
-        // "lg:static absolute transition-transform duration-1000 lg:translate-x-0"
+        "flex bg-gradient-to-b pt-3 from-[#dcdcec] via-[#b96a86] to-[#9154ce] dark:from-[#52525c] dark:via-[#5f0726] dark:to-[#301051]",
+        locale === 'en' && (sidebarVisible ? "translate-x-0" : "-translate-x-full"),
+        locale === 'fa' && (sidebarVisible ? "translate-x-0" : "translate-x-full"),
+        "lg:static absolute transition-transform duration-1000 lg:translate-x-0",
+        locale === 'fa' ? 'right-0' : 'left-0'
       )}
     >
       {children}

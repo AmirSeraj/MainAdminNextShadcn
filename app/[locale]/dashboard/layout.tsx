@@ -30,14 +30,17 @@ const Layout = async ({
       namespaces={i18Namespaces}
     >
       <SidebarProvider>
-        <div className="flex" dir={locale === "fa" ? "rtl" : "ltr"}>
+        <div
+          className="flex relative w-full h-full overflow-x-hidden"
+          dir={locale === "fa" ? "rtl" : "ltr"}
+        >
           {/* sidebar */}
           <Sidebar locale={locale} />
 
           {/* content */}
           <div className="flex flex-col w-full sm:p-5 p-2">
             <ThemeProvider attribute="class" enableSystem enableColorScheme>
-              <Navbar />
+              <Navbar locale={locale} />
               {children}
               {/* <Footer /> */}
             </ThemeProvider>

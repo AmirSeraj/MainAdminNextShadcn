@@ -11,7 +11,7 @@ const SidebarFooter = async ({ locale }: { locale: string }) => {
       <div className={locale === "fa" && "rotate-180"}>
         <IoExitOutline size={22} />
       </div>
-      <button className="text-lg">
+      <button className="text-md">
         {locale === "fa" ? "خروج" : "Exit"}
       </button>
     </form>
