@@ -7,6 +7,8 @@ import TranslationsProvider from "@/components/providers/TranslationsProvider";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { SidebarProvider } from "@/components/providers/SidebarProvider";
 
+import { NextUIProvider } from "@nextui-org/system";
+
 const i18Namespaces = ["dashboard"];
 
 const Layout = async ({
@@ -29,24 +31,26 @@ const Layout = async ({
       locale={locale}
       namespaces={i18Namespaces}
     >
-      <SidebarProvider>
-        <div
-          className="flex relative w-full h-full overflow-x-hidden"
-          dir={locale === "fa" ? "rtl" : "ltr"}
-        >
-          {/* sidebar */}
-          <Sidebar locale={locale} />
+      <NextUIProvider>
+        <SidebarProvider>
+          <div
+            className="flex relative w-full h-full overflow-x-hidden"
+            dir={locale === "fa" ? "rtl" : "ltr"}
+          >
+            {/* sidebar */}
+            <Sidebar locale={locale} />
 
-          {/* content */}
-          <div className="flex flex-col w-full sm:p-5 p-2">
-            <ThemeProvider attribute="class" enableSystem enableColorScheme>
-              <Navbar locale={locale} />
-              {children}
-              {/* <Footer /> */}
-            </ThemeProvider>
+            {/* content */}
+            <div className="flex flex-col w-full sm:p-5 p-2">
+              <ThemeProvider attribute="class" enableSystem enableColorScheme>
+                <Navbar locale={locale} />
+                {children}
+                {/* <Footer /> */}
+              </ThemeProvider>
+            </div>
           </div>
-        </div>
-      </SidebarProvider>
+        </SidebarProvider>
+      </NextUIProvider>
     </TranslationsProvider>
   );
 };

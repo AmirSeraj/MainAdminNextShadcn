@@ -1,0 +1,5 @@
+npm i jalali-moment
+
+import moment from "jalali-moment";
+
+{moment(item.created_at).locale("fa").format("YYYY-MM-DD")}

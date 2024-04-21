@@ -12,8 +12,10 @@ const sanctum_path = process.env.NEXT_APP_URL + "sanctum/csrf-cookie";
 const login_path = process.env.NEXT_APP_URL + "api/auth/login";
 const register_path = process.env.NEXT_APP_URL + "api/auth/register";
 const fetchUserByToken_path = process.env.NEXT_APP_URL + "api/user";
+const fetchAllUsers_path = process.env.NEXT_APP_URL + "api/manager/users";
 /******* PATH *******/
 
+/**get session */
 export const getSession = async () => {
   const session = await getIronSession<SessionData>(cookies(), sessionOptions);
 
@@ -104,6 +106,7 @@ export const register: (values: z.infer<typeof RegisterSchema>) => Promise<{
   }
 };
 
+/**fetch user */
 export const fetchLoggedInUser = async (token: string | undefined) => {
   try {
     const session = await getSession();
@@ -123,12 +126,13 @@ export const fetchLoggedInUser = async (token: string | undefined) => {
   }
 };
 
+
+/**login */
 export const login: (values: z.infer<typeof LoginSchema>) => Promise<{
   error: string | false;
   success: string | false;
   // isLoading: false;
 }> = async (values: z.infer<typeof LoginSchema>) => {
-
   ///data validation
   const validatedFields = LoginSchema.safeParse(values);
   if (!validatedFields.success) {
@@ -192,8 +196,50 @@ export const login: (values: z.infer<typeof LoginSchema>) => Promise<{
   }
 };
 
+/**logout */
 export const logout = async () => {
   const session = await getSession();
   session.destroy();
   redirect("/login");
+};
+
+/**get users */
+export const getUsers = async () => {
+  const session = await getSession();
+  const token = session.token;
+  console.log('sess',session);
+
+  try {
+    //CSRF Token
+    const csrf_response = await fetch(sanctum_path, {
+      method: "GET",
+      credentials: "include", //Include credentials for cross-origin requests
+    });
+
+    if (csrf_response.ok) {
+      try {
+        const res = await fetch(fetchAllUsers_path, {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const response = await res.json();
+        return response;
+      } catch (error) {
+        console.log("error2", error);
+        return {
+          error: "Something Wrong, try again!",
+          success: false,
+        };
+      }
+    }
+  } catch (error) {
+    console.log("error", error);
+    return {
+      error: "Something Wrong, try again!",
+      success: false,
+    };
+  }
 };
