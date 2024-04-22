@@ -5,8 +5,8 @@ import { useForm } from "react-hook-form";
 import { LoginSchema } from "@/schemas";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { login } from "@/lib/actions";
 import LoginFormServerSide from "./LoginFormServerSide";
+import { login } from "@/lib/actions/auth/login";
 
 const LoginForm = () => {
   const [error, setError] = useState<string | false | undefined>("");
@@ -27,6 +27,8 @@ const LoginForm = () => {
     setError("");
     setSuccess("");
     setLoading(true);
+    console.log('values',values);
+    
 
     startTransition(() => {
       login(values).then((data) => {

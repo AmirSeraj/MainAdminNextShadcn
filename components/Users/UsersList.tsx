@@ -12,10 +12,13 @@ import {
 } from "@/components/ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { getUsers } from "@/lib/actions";
 import moment from "jalali-moment";
 import CustomButton from "../NextUi/CustomButton";
 import Link from "next/link";
+import { getUsers } from "@/lib/actions/users/getUsers";
+import { CustomPagination } from "../NextUi/CustomPagination";
+import styles from "./styles.module.css";
+import clsx from "clsx";
 
 const i18Namespaces = ["users"];
 
@@ -29,14 +32,17 @@ const UsersList = async ({ locale }: { locale: string }) => {
     email: string;
     created_at: string;
     status: string;
+    last_page: number;
   }
 
-  const users: { data?: User[] } = await getUsers();
+  const users: { data?: User[] } = await getUsers({ page: 3 });
   console.log("users", users);
 
   return (
     <div className="flex flex-col">
-      <h1 className="py-10 font-bold text-2xl relative">{t("users_list")}</h1>
+      <h1 className="pb-5 pt-3 font-bold text-2xl relative">
+        {t("users_list")}
+      </h1>
 
       <CustomButton
         color="success"
@@ -48,58 +54,65 @@ const UsersList = async ({ locale }: { locale: string }) => {
         <Link href={"/dashboard/users/add"}>{t("add_user")}</Link>
       </CustomButton>
 
-      <Table>
-        <TableCaption>deefre rfrfg</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[50px] text-center">{t("id")}</TableHead>
-            <TableHead className="text-center">{t("profile")}</TableHead>
-            <TableHead className="text-center">{t("name")}</TableHead>
-            <TableHead className="text-center">{t("email")}</TableHead>
-            <TableHead className="text-center">{t("status")}</TableHead>
-            <TableHead className="text-center">{t("created_at")}</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {users.data?.map((user: User, index: number) => (
-            <TableRow key={index}>
-              <TableCell className="font-medium text-center">
-                {index + 1}
-              </TableCell>
-              <TableCell className="flex justify-center">
-                <Avatar>
-                  {user?.profile ? (
-                    <AvatarImage src={user?.profile} />
-                  ) : (
-                    <AvatarImage src="/images/user.jfif" />
-                  )}
-                  <AvatarFallback>{user?.name}</AvatarFallback>
-                </Avatar>
-              </TableCell>
-              <TableCell className="text-center">{user?.name}</TableCell>
-              <TableCell className="text-center">{user?.email}</TableCell>
-              <TableCell className="text-center">
-                <Badge
-                  className={
-                    user?.status === "pending"
-                      ? "bg-orange-500"
-                      : user?.status === "success | active"
-                      ? "bg-green-500"
-                      : user?.status === "ban"
-                      ? "bg-black"
-                      : "bg-red-500"
-                  }
-                >
-                  {user?.status}
-                </Badge>
-              </TableCell>
-              <TableCell className="text-center">
-                {moment(user?.created_at).locale(locale).format("YYYY-MM-DD")}
-              </TableCell>
+      <div className={clsx(styles.container, "px-2")}>
+        <Table>
+          {/* <TableCaption>
+          <CustomPagination totalPage={users?.total} />
+        </TableCaption> */}
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[50px] text-center">{t("id")}</TableHead>
+              <TableHead className="text-center">{t("profile")}</TableHead>
+              <TableHead className="text-center">{t("name")}</TableHead>
+              <TableHead className="text-center">{t("email")}</TableHead>
+              <TableHead className="text-center">{t("status")}</TableHead>
+              <TableHead className="text-center">{t("created_at")}</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {users.data?.map((user: User, index: number) => (
+              <TableRow key={index}>
+                <TableCell className="font-medium text-center">
+                  {index + 1}
+                </TableCell>
+                <TableCell className="flex justify-center">
+                  <Avatar>
+                    {user?.profile ? (
+                      <AvatarImage src={user?.profile} />
+                    ) : (
+                      <AvatarImage src="/images/user.jfif" />
+                    )}
+                    <AvatarFallback>{user?.name}</AvatarFallback>
+                  </Avatar>
+                </TableCell>
+                <TableCell className="text-center">{user?.name}</TableCell>
+                <TableCell className="text-center">{user?.email}</TableCell>
+                <TableCell className="text-center">
+                  <Badge
+                    className={
+                      user?.status === "pending"
+                        ? "bg-orange-500"
+                        : user?.status === "success | active"
+                        ? "bg-green-500"
+                        : user?.status === "ban"
+                        ? "bg-black"
+                        : "bg-red-500"
+                    }
+                  >
+                    {user?.status}
+                  </Badge>
+                </TableCell>
+                <TableCell className="text-center">
+                  {moment(user?.created_at).locale(locale).format("YYYY-MM-DD")}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+      <div className="flex justify-center mt-5 items-center" dir="ltr">
+        {users?.last_page && <CustomPagination totalPage={users?.last_page} />}
+      </div>
     </div>
   );
 };

@@ -1,9 +1,9 @@
 import { SiteIcon } from "@/components/SvgIcons";
-import { getSession } from "@/lib/actions";
 import { FaUserShield } from "react-icons/fa";
 import Image from "next/image";
 import React from "react";
 import CloseSidebar from "./CloseSidebar";
+import { getSession } from "@/lib/actions/getSession";
 
 const SidebarHeader = async ({
   siteName,

@@ -1,7 +1,7 @@
-import { getSession } from "@/lib/actions";
 import styles from "./auth.module.css";
 import { redirect } from "next/navigation";
 import clsx from "clsx";
+import { getSession } from "@/lib/actions/getSession";
 
 const AuthLayout = async ({ children }: { children: React.ReactNode }) => {
   const session = await getSession();

@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { RegisterSchema } from "@/schemas";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { register } from "@/lib/actions";
+import { register } from "@/lib/actions/auth/register";
 
 const RegisterForm = () => {
   const [error, setError] = useState<string | false>("");

@@ -1,4 +1,3 @@
-import { getSession } from "@/lib/actions";
 import { redirect } from "next/navigation";
 import initTranslations from "@/app/i18n";
 import Sidebar from "@/components/Sidebar/page";
@@ -8,6 +7,7 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { SidebarProvider } from "@/components/providers/SidebarProvider";
 
 import { NextUIProvider } from "@nextui-org/system";
+import { getSession } from "@/lib/actions/getSession";
 
 const i18Namespaces = ["dashboard"];
 
@@ -41,7 +41,7 @@ const Layout = async ({
             <Sidebar locale={locale} />
 
             {/* content */}
-            <div className="flex flex-col w-full sm:p-5 p-2">
+            <div className="flex flex-col w-full sm:p-5 p-2 h-screen">
               <ThemeProvider attribute="class" enableSystem enableColorScheme>
                 <Navbar locale={locale} />
                 {children}
