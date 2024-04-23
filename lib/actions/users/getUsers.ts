@@ -8,7 +8,7 @@ const path = process.env.NEXT_APP_URL + "api/manager/users?page=";
 /**PATH */
 
 /**get users */
-export const getUsers = async ({ page }: { page: number }) => {
+export const getUsers = async (page: number) => {
   const session = await getSession();
   const token = session.token;
 
@@ -17,9 +17,13 @@ export const getUsers = async ({ page }: { page: number }) => {
     const csrf_response = await fetch(sanctum_path, {
       method: "GET",
       credentials: "include", //Include credentials for cross-origin requests
+      next: { revalidate: 10 },
     });
 
     if (csrf_response.ok) {
+
+      // await new Promise((resolve) => setTimeout(resolve, 1000000));
+
       try {
         const res = await fetch(path + page, {
           method: "GET",

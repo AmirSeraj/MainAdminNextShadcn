@@ -22,9 +22,17 @@ import clsx from "clsx";
 
 const i18Namespaces = ["users"];
 
-const UsersList = async ({ locale }: { locale: string }) => {
+const UsersList = async ({
+  locale,
+  searchParams,
+}: {
+  locale: string;
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
+}) => {
   const { t } = await initTranslations(locale, i18Namespaces);
-
   interface User {
     index: number;
     name: string;
@@ -33,10 +41,10 @@ const UsersList = async ({ locale }: { locale: string }) => {
     created_at: string;
     status: string;
     last_page: number;
+    current_page: number;
   }
-
-  const users: { data?: User[] } = await getUsers({ page: 3 });
-  console.log("users", users);
+  const users: { data?: User[] } = await getUsers(parseInt(searchParams?.page));
+  const current_page = parseInt(searchParams?.page) || parseInt(users?.current_page);
 
   return (
     <div className="flex flex-col">
@@ -111,7 +119,12 @@ const UsersList = async ({ locale }: { locale: string }) => {
         </Table>
       </div>
       <div className="flex justify-center mt-5 items-center" dir="ltr">
-        {users?.last_page && <CustomPagination totalPage={users?.last_page} />}
+        {users?.last_page && (
+          <CustomPagination
+            totalPage={users?.last_page}
+            current_page={current_page}
+          />
+        )}
       </div>
     </div>
   );
