@@ -23,3 +23,13 @@ export const RegisterSchema = z.object({
     message: "Name is required!",
   }),
 });
+
+export const EditUserSchema = z.object({
+  email: z.string().email({
+    message: "E-mail is required!",
+  }),
+  status: z.string(),
+  name: z.string().min(1, {
+    message: "Name is required!",
+  }),
+});

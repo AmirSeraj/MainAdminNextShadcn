@@ -36,3 +36,67 @@
   height: calc(100vh - 290px);
   overflow-y: auto;
 }
+
+/**user skeleton**/
+
+.skeletonContainer {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.title {
+  width: 150px;
+  background-color: #ccc;
+  height: 25px;
+  border-radius: 15px;
+  /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.btn {
+  width: 120px;
+  height: 40px;
+  background-color: #ccc;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.table_content {
+  width: 90px;
+  height: 20px;
+  background-color: #ccc;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  border-radius: 10px;
+}
+
+.index {
+  width: 25px;
+  height: 15px;
+  background-color: #ccc;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  border-radius: 10px;
+}
+
+.user_img {
+  width: 40px;
+  height: 40px;
+  background-color: #ccc;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  border-radius: 50%;
+}
+
+.user_name {
+  width: 80px;
+  height: 15px;
+  background-color: #ccc;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  border-radius: 10px;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}

@@ -1,24 +1,16 @@
-"use server";
+'use server'
 
 import { getSession } from "../getSession";
 
 /***PATH */
-const path = process.env.NEXT_APP_URL + "api/user/edit/";
+const path = process.env.NEXT_APP_URL + "api/user/";
 
 /**fetch user */
-export const EditUser = async (values: {
-  values: {
-    email: string;
-    name: string;
-    status: string;
-    id: number;
-  };
-}) => {
-    console.log('val',values);
+export const UserInfo = async (id : number) => {
   try {
     const session = await getSession();
-    const response = await fetch(path + values?.id, {
-      method: "POST",
+    const response = await fetch(path + id, {
+      method: "GET",
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${session.token}`,

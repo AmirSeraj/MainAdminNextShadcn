@@ -39,7 +39,6 @@ export const CustomPagination = ({
   const pathname = usePathname();
   const { replace } = useRouter();
   const handlePageChange = (page: number) => {
-    console.log("page", page);
     replace(`${pathname}?page=${page}`);
   };
 

@@ -1,6 +1,6 @@
 import UsersList from "@/components/Users/UsersList";
 import React, { Suspense } from "react";
-import UsersSkeleton from "./UsersSkeleton";
+import UsersSkeleton from "@/components/Users/UsersSkeleton";
 
 const UsersPage = ({
   params: { locale },
@@ -15,7 +15,6 @@ const UsersPage = ({
   return (
     <div className="py-2 px-5">
       <Suspense fallback={<UsersSkeleton />}>
-        <UsersSkeleton />
         <UsersList locale={locale} searchParams={searchParams} />
       </Suspense>
     </div>

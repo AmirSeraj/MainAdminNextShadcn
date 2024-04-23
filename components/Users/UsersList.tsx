@@ -1,10 +1,8 @@
 import initTranslations from "@/app/i18n";
 import React from "react";
-
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -75,6 +73,7 @@ const UsersList = async ({
               <TableHead className="text-center">{t("email")}</TableHead>
               <TableHead className="text-center">{t("status")}</TableHead>
               <TableHead className="text-center">{t("created_at")}</TableHead>
+              <TableHead className="text-center">{t("actions")}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -112,6 +111,12 @@ const UsersList = async ({
                 </TableCell>
                 <TableCell className="text-center">
                   {moment(user?.created_at).locale(locale).format("YYYY-MM-DD")}
+                </TableCell>
+                <TableCell className="text-center">
+                  <Link href={`/dashboard/users/${user?.id}`}>
+                    <Badge className="bg-green-500">edit</Badge>
+                  </Link>
+                  <Badge className="bg-red-500 mx-1 cursor-pointer">delete</Badge>
                 </TableCell>
               </TableRow>
             ))}

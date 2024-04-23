@@ -1,9 +1,7 @@
-import React from 'react'
+import UserEdit from "@/components/Users/UserEdit";
 
 const SingleUserPage = () => {
-  return (
-    <div>SingleUserPage</div>
-  )
-}
+  return <UserEdit />;
+};
 
-export default SingleUserPage
+export default SingleUserPage;
