@@ -9,7 +9,7 @@ import { SidebarProvider } from "@/components/providers/SidebarProvider";
 import { NextUIProvider } from "@nextui-org/system";
 import { getSession } from "@/lib/actions/getSession";
 
-const i18Namespaces = ["dashboard"];
+const i18Namespaces = ["dashboard","users"];
 
 const Layout = async ({
   children,

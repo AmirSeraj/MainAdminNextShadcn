@@ -1,3 +1,5 @@
+https://i18nexus.com/tutorials/nextjs/react-i18next
+
 ///****App router i18next (internationalization)
 
 ///1-installation:
@@ -94,5 +96,120 @@ export default async function initTranslations(
   };
 }
 
+//and in main layout wrap TranslationProvider:
+
+const i18Namespaces = ["dashboard"];
+
+const Layout = async ({
+  children,
+  params: { locale },
+}: {
+  children: React.ReactNode;
+  params: { locale: string };
+}) => {
+
+  const { t, resources } = await initTranslations(locale, i18Namespaces);
+
+  return (
+    <TranslationsProvider
+      resources={resources}
+      locale={locale}
+      namespaces={i18Namespaces}
+    >
+      {children}
+    </TranslationsProvider>
+  );
+};
+
+export default Layout;
+
+
+
 //in server-side components: 
+
+const UsersPage = ({
+  params: { locale },
+  searchParams,
+}: {
+  params: { locale: string }
+}) => {
+  return (
+    <div className="py-2 px-5">
+      <Suspense fallback={<UsersSkeleton />}>
+        <UsersList locale={locale} searchParams={searchParams} />
+      </Suspense>
+    </div>
+  );
+};
+
+//and in server-side component get locale you passed from server-side page:
+
+const i18Namespaces = ["users"];
+const { t } = await initTranslations(locale, i18Namespaces);
+
+//and use like this
+<TableHead className="w-[50px] text-center">{t("id")}</TableHead>
+
+///in client-side components:
+
+//make a TranslationProvider.js file
+"use client";
+
+import { I18nextProvider } from "react-i18next";
+import initTranslations from "@/app/i18n";
+import { createInstance } from "i18next";
+
+export default function TranslationsProvider({
+  children,
+  locale,
+  namespaces,
+  resources,
+}) {
+  const i18n = createInstance();
+
+  initTranslations(locale, namespaces, i18n, resources);
+
+  return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
+}
+
+//and wrap it in around client component in server-side component file:
+
+import initTranslations from "@/app/i18n";
+import AddUser from "@/components/Users/AddUser";
+import TranslationsProvider from "@/components/providers/TranslationsProvider";
+import React from "react";
+
+const i18Namespaces = ["users"];
+
+const AddUserPage = async ({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) => {
+  const { t, resources } = await initTranslations(locale, i18Namespaces);
+  return (
+    <TranslationsProvider
+      resources={resources}
+      locale={locale}
+      namespaces={i18Namespaces}
+    >
+      <AddUser />
+    </TranslationsProvider>
+  );
+};
+
+export default AddUserPage;
+
+///and in client components:
+
+'use client';
+
+import { useTranslation } from 'react-i18next';
+
+export default function ExampleClientComponent() {
+  const { t } = useTranslation();
+
+  return <h3>{t('greeting')}</h3>;
+}
+
 

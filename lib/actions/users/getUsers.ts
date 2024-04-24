@@ -21,9 +21,6 @@ export const getUsers = async (page: number) => {
     });
 
     if (csrf_response.ok) {
-
-      // await new Promise((resolve) => setTimeout(resolve, 1000000));
-
       try {
         const res = await fetch(path + page, {
           method: "GET",

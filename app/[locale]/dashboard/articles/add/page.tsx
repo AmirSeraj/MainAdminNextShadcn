@@ -2,7 +2,7 @@ import React from 'react'
 
 const AddArticlePage = () => {
   return (
-    <div>AddArticlePage</div>
+    <div>AddArtir4r4tr5clePage</div>
   )
 }
 
