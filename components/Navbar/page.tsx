@@ -8,10 +8,10 @@ import { useToggleSidebar } from "../hooks/useSidebar";
 
 const Navbar = ({ locale }: { locale: string }) => {
   const pathname = usePathname();
-  
+
   const { toggleSidebar } = useToggleSidebar();
   return (
-    <div className="w-full py-6 sm:px-6 px-3 flex justify-between items-center bg-gray-500 rounded-md">
+    <div className="w-full py-6 sm:px-6 px-3 flex justify-between items-center bg-gray-500 rounded-md sticky top-0 z-50">
       <div className="flex items-center sm:gap-3 gap-1">
         <div className="cursor-pointer lg:hidden block" onClick={toggleSidebar}>
           {locale === "fa" ? (

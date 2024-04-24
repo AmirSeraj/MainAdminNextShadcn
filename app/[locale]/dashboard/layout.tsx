@@ -41,7 +41,7 @@ const Layout = async ({
             <Sidebar locale={locale} />
 
             {/* content */}
-            <div className="flex flex-col w-full sm:p-5 p-2 h-screen">
+            <div className="flex flex-col w-full sm:p-5 p-2 h-screen overflow-y-auto">
               <ThemeProvider attribute="class" enableSystem enableColorScheme>
                 <Navbar locale={locale} />
                 {children}

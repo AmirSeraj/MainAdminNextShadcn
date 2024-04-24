@@ -18,7 +18,7 @@ import { CustomPagination } from "../NextUi/CustomPagination";
 import styles from "./styles.module.css";
 import clsx from "clsx";
 
-const i18Namespaces = ["users"];
+const i18Namespaces = ["users", "common"];
 
 const UsersList = async ({
   locale,
@@ -42,7 +42,8 @@ const UsersList = async ({
     current_page: number;
   }
   const users: { data?: User[] } = await getUsers(parseInt(searchParams?.page));
-  const current_page = parseInt(searchParams?.page) || parseInt(users?.current_page);
+  const current_page =
+    parseInt(searchParams?.page) || parseInt(users?.current_page);
 
   return (
     <div className="flex flex-col">
@@ -57,7 +58,7 @@ const UsersList = async ({
         radius="none"
         variant="shadow"
       >
-        <Link href={"/dashboard/users/add"}>{t("add_user")}</Link>
+        <Link href={"/dashboard/users/add"}>{t("add_new_user")}</Link>
       </CustomButton>
 
       <div className={clsx(styles.container, "px-2")}>
@@ -67,13 +68,13 @@ const UsersList = async ({
         </TableCaption> */}
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[50px] text-center">{t("id")}</TableHead>
+              <TableHead className="w-[50px] text-center">{t("common:id")}</TableHead>
               <TableHead className="text-center">{t("profile")}</TableHead>
               <TableHead className="text-center">{t("name")}</TableHead>
               <TableHead className="text-center">{t("email")}</TableHead>
               <TableHead className="text-center">{t("status")}</TableHead>
               <TableHead className="text-center">{t("created_at")}</TableHead>
-              <TableHead className="text-center">{t("actions")}</TableHead>
+              <TableHead className="text-center">{t("common:actions")}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -116,7 +117,9 @@ const UsersList = async ({
                   <Link href={`/dashboard/users/${user?.id}`}>
                     <Badge className="bg-green-500">edit</Badge>
                   </Link>
-                  <Badge className="bg-red-500 mx-1 cursor-pointer">delete</Badge>
+                  <Badge className="bg-red-500 mx-1 cursor-pointer">
+                    delete
+                  </Badge>
                 </TableCell>
               </TableRow>
             ))}
@@ -124,7 +127,7 @@ const UsersList = async ({
         </Table>
       </div>
       <div className="flex justify-center mt-5 items-center" dir="ltr">
-        {users?.last_page && (
+        {users?.last_page > 1 && (
           <CustomPagination
             totalPage={users?.last_page}
             current_page={current_page}
