@@ -25,7 +25,7 @@ export const login: (values: z.infer<typeof LoginSchema>) => Promise<{
 
   /**session */
   const session = await getSession();
-  
+
   //destructuring data
   const { password, email } = validatedFields.data;
 
@@ -35,7 +35,7 @@ export const login: (values: z.infer<typeof LoginSchema>) => Promise<{
       method: "GET",
       credentials: "include", //Include credentials for cross-origin requests
     });
-    
+
     if (csrf_response.ok) {
       try {
         /**login user */
@@ -50,7 +50,14 @@ export const login: (values: z.infer<typeof LoginSchema>) => Promise<{
           }),
         });
         const response = await res.json();
-        console.log('ress',response);
+        console.log("ress", response);
+
+        if (response.status === "error") {
+          return {
+            error: response.message,
+            success: false,
+          }
+        }
 
         if (response.status === "success") {
           session.token = response.token;

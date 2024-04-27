@@ -28,6 +28,7 @@ const CardWrapper = ({
   isPending,
   error,
   success,
+  status
 }: {
   title: string;
   form: UseFormReturn<FormAddProps, any, undefined>;
@@ -35,6 +36,7 @@ const CardWrapper = ({
   isPending: boolean;
   error?: string | false;
   success?: string | false;
+  status?: boolean 
 }) => {
   const { t } = useTranslation();
   return (
@@ -42,14 +44,14 @@ const CardWrapper = ({
       <div className="flex md:w-1/2 w-full flex-col gap-2 sm:p-5 p-2 items-center border rounded-lg my-6 shadow-lg">
         <h1 className="text-2xl font-bold mb-5">{title}</h1>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 sm:w-[70%] w-full">
             <div className="space-y-4">
               <FormField
                 control={form.control}
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('name')}</FormLabel>
+                    <FormLabel>{t("name")}</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
@@ -67,7 +69,7 @@ const CardWrapper = ({
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('email')}</FormLabel>
+                    <FormLabel>{t("email")}</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
@@ -80,18 +82,39 @@ const CardWrapper = ({
                   </FormItem>
                 )}
               />
+              {status && (
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem className="relative">
+                      <FormLabel>{t("password")}</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          disabled={isPending}
+                          placeholder="******"
+                          type="text"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
               <FormField
                 control={form.control}
                 name="password"
                 render={({ field }) => (
                   <FormItem className="relative">
-                    <FormLabel>{t('password')}</FormLabel>
+                    <FormLabel>{t("password")}</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
                         disabled={isPending}
                         placeholder="******"
                         type="text"
+                        standard
                       />
                     </FormControl>
                     <FormMessage />
@@ -102,8 +125,8 @@ const CardWrapper = ({
 
             {error && <FormError message={error} />}
             {success && <FormSuccess message={success} />}
-            <Button type="submit" disabled={isPending} className="w-full">
-              Create a user
+            <Button type="submit" disabled={isPending}>
+              {t("submit")}
             </Button>
           </form>
         </Form>

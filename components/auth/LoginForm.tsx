@@ -27,8 +27,6 @@ const LoginForm = () => {
     setError("");
     setSuccess("");
     setLoading(true);
-    console.log('values',values);
-    
 
     startTransition(() => {
       login(values).then((data) => {

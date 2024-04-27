@@ -46,7 +46,16 @@ const UserEdit = () => {
     });
   };
 
-  return <div>UserEdit</div>;
+  return (
+    <CardWrapper
+      title={t("add_new_user")}
+      form={form}
+      onSubmit={onSubmit}
+      isPending={isPending}
+      error={error}
+      success={success}
+    />
+  );
 };
 
 export default UserEdit;
