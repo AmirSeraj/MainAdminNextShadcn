@@ -36,6 +36,8 @@ export const login: (values: z.infer<typeof LoginSchema>) => Promise<{
       credentials: "include", //Include credentials for cross-origin requests
     });
 
+    console.log(csrf_response);
+
     if (csrf_response.ok) {
       try {
         /**login user */
