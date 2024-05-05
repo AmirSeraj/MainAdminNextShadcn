@@ -9,7 +9,7 @@ const ArticlePage = ({
   params: { locale: string };
   searchParams?: {
     query?: string;
-    page?: string;
+    page?: number;
   };
 }) => {
   return (

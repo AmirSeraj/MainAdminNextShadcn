@@ -17,6 +17,7 @@ import styles from "./styles.module.css";
 import clsx from "clsx";
 import { getArticles } from "@/lib/actions/articles/getArticles";
 import Image from "next/image";
+import { SingleArticleProps } from "@/lib/types";
 
 const i18Namespaces = ["blog", "common"];
 
@@ -27,31 +28,14 @@ const ArticlesList = async ({
   locale: string;
   searchParams?: {
     query?: string;
-    page?: string;
+    page?: number;
   };
 }) => {
   const { t } = await initTranslations(locale, i18Namespaces);
-  interface Article {
-    index: number;
-    id: number;
-    author: string;
-    title: string;
-    image: string;
-    content: string;
-    summary: string;
-    min_read: number;
-    short_link: string;
-    created_at: string;
-    confirmation_status: string;
-    author_id: number;
-    last_page: number;
-    current_page: number;
-  }
-  const articles: { data?: Article[] } = await getArticles(
-    parseInt(searchParams?.page)
-  );
-  const current_page =
-    parseInt(searchParams?.page) || parseInt(articles?.current_page);
+
+  const page = searchParams?.page ?? 1;
+
+  const { current_page, data, last_page } = await getArticles(page);
 
   return (
     <div className="flex flex-col">
@@ -88,15 +72,15 @@ const ArticlesList = async ({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {articles.data?.map((article: Article, index: number) => (
+            {data?.map((article: SingleArticleProps, index: number) => (
               <TableRow key={index}>
                 <TableCell className="font-medium text-center">
                   {index + 1}
                 </TableCell>
                 <TableCell className="flex justify-center">
-                  {article?.image ? (
+                  {article?.article_image ? (
                     <Image
-                      src={article.image}
+                      src={process.env.NEXT_PUBLIC_APP_URL_SANCTUM + article.article_image}
                       width={60}
                       height={60}
                       className="rounded-md shadow-md"
@@ -114,22 +98,20 @@ const ArticlesList = async ({
                 </TableCell>
                 <TableCell className="text-center">{article?.title}</TableCell>
                 <TableCell className="text-center">
-                  {article?.min_read}
+                  {article?.min_read} {t("common:minute")}
                 </TableCell>
-                <TableCell className="text-center">
-                  {article?.author}
-                </TableCell>
+                <TableCell className="text-center">author name</TableCell>
                 <TableCell className="text-center">
                   <Badge
                     className={
-                      article?.confirmation_status === "pending"
+                      article?.status === "pending"
                         ? "bg-orange-500"
-                        : article?.confirmation_status === "success"
+                        : article?.status === "success"
                         ? "bg-green-500"
                         : "bg-red-500"
                     }
                   >
-                    {article?.confirmation_status}
+                    {article?.status}
                   </Badge>
                 </TableCell>
                 <TableCell className="text-center">
@@ -151,9 +133,9 @@ const ArticlesList = async ({
         </Table>
       </div>
       <div className="flex justify-center mt-5 items-center" dir="ltr">
-        {articles?.last_page > 1 && (
+        {last_page > 1 && (
           <CustomPagination
-            totalPage={articles?.last_page}
+            totalPage={last_page}
             current_page={current_page}
           />
         )}

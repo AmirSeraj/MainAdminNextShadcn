@@ -7,11 +7,11 @@ export interface SessionData {
 }
 
 export const sessionOptions: SessionOptions = {
-  password: process.env.SECRET_KEY!,
+  password: process.env.NEXT_PUBLIC_SECRET_KEY!,
   cookieName: "auth",
   cookieOptions: {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: process.env.NEXT_PUBLIC_NODE_ENV === "production",
   },
 };
 

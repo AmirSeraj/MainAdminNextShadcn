@@ -3,7 +3,7 @@
 import { getSession } from "../getSession";
 
 /***PATH */
-const path = process.env.NEXT_APP_URL + "api/user";
+const path = process.env.NEXT_PUBLIC_APP_URL_API + "user";
 
 /**fetch user */
 export const LoggedInUser = async (token: string | undefined) => {

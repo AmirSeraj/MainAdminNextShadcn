@@ -2,17 +2,17 @@
 
 import { LoginSchema } from "@/schemas";
 import * as z from "zod";
-import { getSession } from "../getSession";
-import { LoggedInUser } from "./loggedInUser";
+import { getSession } from "@/lib/actions/getSession";
 import { redirect } from "next/navigation";
+import { FormSchema } from "./FormSchema";
 
 /**PATH */
-const sanctum_path = process.env.NEXT_PUBLIC_APP_URL_SANCTUM + "sanctum/csrf-cookie";
-const login_path = process.env.NEXT_PUBLIC_APP_URL_API + "auth/login";
+const sanctum_path = process.env.NEXT_APP_URL + "sanctum/csrf-cookie";
+const login_path = process.env.NEXT_APP_URL + "api/auth/login";
 /**PATH */
 
 /**login */
-export const login: (values: z.infer<typeof LoginSchema>) => Promise<{
+export const submitForm: (values: z.infer<typeof FormSchema>) => Promise<{
   error: string | false;
   success: string | false;
   // isLoading: false;

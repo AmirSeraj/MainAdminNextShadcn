@@ -1,12 +1,13 @@
-'use server'
+"use server";
 
 import { RegisterSchema } from "@/schemas";
 import * as z from "zod";
 import { getSession } from "../getSession";
 
 /**PATH */
-const sanctum_path = process.env.NEXT_APP_URL + "sanctum/csrf-cookie";
-const register_path = process.env.NEXT_APP_URL + "api/auth/register";
+const sanctum_path =
+  process.env.NEXT_PUBLIC_APP_URL_SANCTUM + "sanctum/csrf-cookie";
+const register_path = process.env.NEXT_PUBLIC_APP_URL_API + "auth/register";
 /**PATH */
 
 /**register user */
@@ -36,33 +37,25 @@ export const register: (values: z.infer<typeof RegisterSchema>) => Promise<{
 
   try {
     //CSRF Token
-    const csrf_response = await fetch(
-      // process.env.NEXT_APP_URL + "sanctum/csrf-cookie",
-      sanctum_path,
-      {
-        method: "GET",
-        credentials: "include", //Include credentials for cross-origin requests
-      }
-    );
+    const csrf_response = await fetch(sanctum_path, {
+      method: "GET",
+      credentials: "include", //Include credentials for cross-origin requests
+    });
 
     if (csrf_response.ok) {
       try {
         /**register user */
-        const res = await fetch(
-          // process.env.NEXT_APP_URL + "api/auth/register",
-          register_path,
-          {
-            method: "POST",
-            headers: {
-              "Content-type": "application/json",
-            },
-            body: JSON.stringify({
-              email: email,
-              password: password,
-              name: name,
-            }),
-          }
-        );
+        const res = await fetch(register_path, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+            name: name,
+          }),
+        });
         const response = await res.json();
         session.token = response.token;
         // session.isLoggedIn = true;

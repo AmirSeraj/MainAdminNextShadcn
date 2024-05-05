@@ -3,18 +3,17 @@
 import { getSession } from "../getSession";
 
 /***PATH */
-const path = process.env.NEXT_APP_URL + "api/user/edit/";
+const path = process.env.NEXT_PUBLIC_APP_URL_API + "user/edit/";
 
 /**fetch user */
 export const EditUser = async (values: {
   values: {
-    email: string;
-    name: string;
-    status: string;
-    id: number;
+    email?: string;
+    name?: string;
+    status?: string;
+    id?: number;
   };
 }) => {
-    console.log('val',values);
   try {
     const session = await getSession();
     const response = await fetch(path + values?.id, {
