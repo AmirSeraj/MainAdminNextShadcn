@@ -36,6 +36,8 @@ const ArticlesList = async ({
   const page = searchParams?.page ?? 1;
 
   const { current_page, data, last_page } = await getArticles(page);
+  console.log('data',data);
+  
 
   return (
     <div className="flex flex-col">
@@ -78,9 +80,9 @@ const ArticlesList = async ({
                   {index + 1}
                 </TableCell>
                 <TableCell className="flex justify-center">
-                  {article?.article_image ? (
+                  {article?.photo ? (
                     <Image
-                      src={process.env.NEXT_PUBLIC_APP_URL_SANCTUM + article.article_image}
+                      src={process.env.NEXT_PUBLIC_APP_URL_SANCTUM + article.photo}
                       width={60}
                       height={60}
                       className="rounded-md shadow-md"
@@ -100,7 +102,7 @@ const ArticlesList = async ({
                 <TableCell className="text-center">
                   {article?.min_read} {t("common:minute")}
                 </TableCell>
-                <TableCell className="text-center">author name</TableCell>
+                <TableCell className="text-center">{article?.author?.name}</TableCell>
                 <TableCell className="text-center">
                   <Badge
                     className={
@@ -119,7 +121,7 @@ const ArticlesList = async ({
                     .locale(locale)
                     .format("YYYY-MM-DD")}
                 </TableCell>
-                <TableCell className="text-center">
+                <TableCell className="text-center gap-1">
                   <Link href={`/dashboard/artticles/${article?.id}`}>
                     <Badge className="bg-green-500">edit</Badge>
                   </Link>

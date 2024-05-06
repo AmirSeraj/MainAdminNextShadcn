@@ -5,22 +5,20 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
-} from "../ui/form";
+} from "@/components/ui/form";
 import { UseFormReturn } from "react-hook-form";
 import * as z from "zod";
-import { FormError } from "../Form/form-error";
-import { FormSuccess } from "../Form/form-success";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { IoEyeOff } from "react-icons/io5";
-import { IoEye } from "react-icons/io5";
-import BackButton from "./BackButton";
-import Loading from "../loading/Loading_1/page";
+import { FormError } from "@/components/Form/form-error";
+import { FormSuccess } from "@/components/Form/form-success";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import Loading from "@/components/loading/Loading_1/page";
 import { FormSchema } from "./FormSchema";
 import Image from "next/image";
 import { BsImages } from "react-icons/bs";
 import { BsPaperclip } from "react-icons/bs";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { Textarea } from "@/components/ui/textarea";
 
 interface FormProps {
   email: string;
@@ -37,11 +35,7 @@ const FormContainer = ({
   isPending,
   error,
   success,
-  showPassword,
-  setShowPassword,
   loading,
-  showConfirmPassword,
-  setShowConfirmPassword,
   selectedImage,
   setSelectedImage,
 }: {
@@ -66,15 +60,15 @@ const FormContainer = ({
         <div className="space-y-4">
           <FormField
             control={form.control}
-            name="name"
+            name="title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name</FormLabel>
+                <FormLabel>Title</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
                     disabled={isPending}
-                    placeholder="Inset name"
+                    placeholder="Inset title"
                     type="text"
                   />
                 </FormControl>
@@ -87,97 +81,13 @@ const FormContainer = ({
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>E-mail</FormLabel>
+                <FormLabel>Summary</FormLabel>
                 <FormControl>
-                  <Input
+                  <Textarea
                     {...field}
                     disabled={isPending}
-                    placeholder="john.doe@example.com"
-                    type="email"
                     standard
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem className="relative">
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <div className="relative">
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="******"
-                      type={showPassword ? "text" : "password"}
-                    />
-                    <span
-                      onClick={() => setShowPassword(!showConfirmPassword)}
-                      className="absolute right-7 bottom-2 cursor-pointer"
-                    >
-                      {showPassword ? (
-                        <IoEye size={22} />
-                      ) : (
-                        <IoEyeOff size={22} />
-                      )}
-                    </span>
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="confirmPassword"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Confirm Password</FormLabel>
-                <FormControl>
-                  <div className="relative">
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="******"
-                      type={showConfirmPassword ? "text" : "password"}
-                    />
-                    <span
-                      onClick={() =>
-                        setShowConfirmPassword(!showConfirmPassword)
-                      }
-                      className="absolute right-7 bottom-2 cursor-pointer"
-                    >
-                      {showConfirmPassword ? (
-                        <IoEye size={22} />
-                      ) : (
-                        <IoEyeOff size={22} />
-                      )}
-                    </span>
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="title"
-            render={({ field }) => (
-              <FormItem className="relative">
-                <FormLabel>Title</FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    disabled={isPending}
-                    placeholder="title"
-                    type="text"
-                    standard
+                    placeholder="Type your summary..."
                   />
                 </FormControl>
                 <FormMessage />
@@ -245,20 +155,12 @@ const FormContainer = ({
               </FormItem>
             )}
           />
-
-          <div className="flex items-center">
-            <BackButton
-              label={"Forget Password?"}
-              href={"/forgetPassword"}
-              className="!px-0 !justify-start"
-            />
-          </div>
         </div>
 
         {error && <FormError message={error} />}
         {success && <FormSuccess message={success} />}
         <Button type="submit" disabled={isPending} className="w-full">
-          {loading ? <Loading /> : "Login"}
+          {loading ? <Loading /> : "Create Blog"}
         </Button>
       </form>
     </Form>

@@ -42,11 +42,10 @@ const CompleteForm = () => {
 
   return (
     <CardWrapper
-      headerTitle="Submit Form"
-      headerLabel="Create a blog & user"
-      backButtonHref="/register"
-      backButtonLabel="Don`t have an account? SignUp"
-      showSocial
+      headerTitle="Create a new Article"
+      headerLabel="Create a blog"
+      backButtonHref="/dashboard/articles"
+      backButtonLabel="Back to Articles List"
     >
       <FormContainer
         onSubmit={onSubmit}
@@ -54,13 +53,9 @@ const CompleteForm = () => {
         success={success}
         isPending={isPending}
         form={form}
-        showPassword={showPassword}
-        setShowPassword={setShowPassword}
         loading={loading}
         selectedImage={selectedImage}
         setSelectedImage={setSelectedImage}
-        showConfirmPassword={showConfirmPassword}
-        setShowConfirmPassword={setShowConfirmPassword}
       />
     </CardWrapper>
   );

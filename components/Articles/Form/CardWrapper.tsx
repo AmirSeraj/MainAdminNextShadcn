@@ -1,4 +1,4 @@
-import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import BackButton from "./BackButton";
 import { Header } from "./Header";
 import Social from "./Social";
@@ -21,7 +21,7 @@ export const CardWrapper = ({
   showSocial,
 }: CardWrapperProps) => {
   return (
-    <Card className="lg:w-[600px] shadow-lg">
+    <Card className="md:w-[75%] w-full shadow-lg">
       <CardHeader>
         <Header label={headerLabel} title={headerTitle} />
       </CardHeader>

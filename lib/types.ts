@@ -1,3 +1,9 @@
+export interface UserProps {
+  name: string;
+  email: string;
+  profile: string;
+}
+
 export interface SingleArticleProps {
   id?: number;
   title?: string;
@@ -8,8 +14,8 @@ export interface SingleArticleProps {
   short_link?: string;
   status?: string;
   created_at?: string;
-  author_id?: number;
-  article_image?: string;
+  photo?: string;
+  author?: UserProps;
 }
 
 export interface ArticleProps {
