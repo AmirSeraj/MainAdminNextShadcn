@@ -22,8 +22,7 @@ const CompleteForm = () => {
       content: "",
       summary: "",
       min_read: 0,
-      photo: undefined,
-      status : 'success | pending | reject'
+      photo: "",
     },
   });
 

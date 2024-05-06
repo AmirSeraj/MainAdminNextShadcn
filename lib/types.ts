@@ -1,3 +1,7 @@
+import { FormSchema } from "@/components/Articles/Form/FormSchema";
+import { UseFormReturn } from "react-hook-form";
+import * as z from "zod";
+
 export interface UserProps {
   name: string;
   email: string;
@@ -22,4 +26,24 @@ export interface ArticleProps {
   data: SingleArticleProps[];
   last_page?: number;
   current_page?: number;
+}
+
+export interface ArticleCreateFormProps {
+  title: string;
+  summary: string;
+  content: string;
+  image: FileList | string;
+}
+
+export interface FormContainerProps {
+  form: UseFormReturn<ArticleCreateFormProps>;
+  onSubmit: (values: z.infer<typeof FormSchema>) => void;
+  isPending: boolean;
+  error?: string | false;
+  success?: string | false;
+  loading: boolean;
+  selectedImage: Blob | MediaSource | File | null;
+  setSelectedImage: React.Dispatch<
+    React.SetStateAction<File | null | Blob | MediaSource>
+  >;
 }

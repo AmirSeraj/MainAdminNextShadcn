@@ -6,28 +6,17 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
-import { UseFormReturn } from "react-hook-form";
-import * as z from "zod";
 import { FormError } from "@/components/Form/form-error";
 import { FormSuccess } from "@/components/Form/form-success";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Loading from "@/components/loading/Loading_1/page";
-import { FormSchema } from "./FormSchema";
 import Image from "next/image";
 import { BsImages } from "react-icons/bs";
 import { BsPaperclip } from "react-icons/bs";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { Textarea } from "@/components/ui/textarea";
-
-interface FormProps {
-  email: string;
-  password: string;
-  name: string;
-  confirmPassword: string;
-  title: string;
-  single_image: FileList | string;
-}
+import { FormContainerProps } from "@/lib/types";
 
 const FormContainer = ({
   form,
@@ -38,22 +27,7 @@ const FormContainer = ({
   loading,
   selectedImage,
   setSelectedImage,
-}: {
-  form: UseFormReturn<FormProps, any, undefined>;
-  onSubmit: (values: z.infer<typeof FormSchema>) => void;
-  isPending: boolean;
-  error?: string | false;
-  success?: string | false;
-  showPassword: boolean;
-  setShowPassword: React.Dispatch<React.SetStateAction<boolean>>;
-  loading: boolean;
-  showConfirmPassword: boolean;
-  setShowConfirmPassword: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedImage: Blob | MediaSource | undefined;
-  setSelectedImage: React.Dispatch<
-    React.SetStateAction<File | null | Blob | MediaSource>
-  >;
-}) => {
+}: FormContainerProps) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -78,7 +52,7 @@ const FormContainer = ({
           />
           <FormField
             control={form.control}
-            name="email"
+            name="summary"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Summary</FormLabel>
@@ -122,7 +96,7 @@ const FormContainer = ({
 
           <FormField
             control={form.control}
-            name="single_image"
+            name="image"
             render={({ field }) => (
               <FormItem className="relative">
                 <FormLabel>Image&nbsp;</FormLabel>
@@ -150,6 +124,30 @@ const FormContainer = ({
                       </span>
                     </label>
                   </Button>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="tags"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Frameworks</FormLabel>
+                <FormControl>
+                  <MultipleSelector
+                    value={field.value}
+                    onChange={field.onChange}
+                    defaultOptions={OPTIONS}
+                    placeholder="Select frameworks you like..."
+                    emptyIndicator={
+                      <p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
+                        no results found.
+                      </p>
+                    }
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
