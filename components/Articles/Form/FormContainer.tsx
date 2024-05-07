@@ -17,6 +17,21 @@ import { BsPaperclip } from "react-icons/bs";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { Textarea } from "@/components/ui/textarea";
 import { FormContainerProps } from "@/lib/types";
+import MultipleSelector, { Option } from "@/components/ui/multiple-selector";
+
+const OPTIONS: Option[] = [
+  { label: "nextjs", value: "Nextjs" },
+  { label: "Vite", value: "vite", disable: true },
+  { label: "Nuxt", value: "nuxt", disable: true },
+  { label: "Vue", value: "vue, disable: true", disable: true },
+  { label: "Remix", value: "remix" },
+  { label: "Svelte", value: "svelte", disable: true },
+  { label: "Angular", value: "angular", disable: true },
+  { label: "Ember", value: "ember", disable: true },
+  { label: "React", value: "react" },
+  { label: "Gatsby", value: "gatsby", disable: true },
+  { label: "Astro", value: "astro", disable: true },
+];
 
 const FormContainer = ({
   form,
@@ -107,9 +122,12 @@ const FormContainer = ({
                       className="hidden"
                       id="fileInput"
                       onBlur={field.onBlur}
-                      name={field.name}
+                      // name={field.name}
+                      name="image"
+                      
                       onChange={(e) => {
                         field.onChange(e.target.files);
+                        console.log('files',field.name);
                         setSelectedImage(e.target.files?.[0] || null);
                       }}
                       ref={field.ref}
@@ -135,7 +153,7 @@ const FormContainer = ({
             name="tags"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Frameworks</FormLabel>
+                <FormLabel>Tags</FormLabel>
                 <FormControl>
                   <MultipleSelector
                     value={field.value}

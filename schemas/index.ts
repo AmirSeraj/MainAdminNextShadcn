@@ -56,7 +56,13 @@ function checkFileType(files: File) {
   }
   return false;
 }
-export const FormSchema = z.object({
+
+const optionSchema = z.object({
+  value: z.string(),
+  disable: z.boolean().optional(),
+});
+
+export const ArticleSchema = z.object({
   title: z.string().min(4, {
     message: "Title is required!",
   }),
@@ -66,7 +72,7 @@ export const FormSchema = z.object({
   summary: z.string().min(10, {
     message: "Summary is required!",
   }),
-  min_read: z.number(),
+  // min_read: z.number(),
   image: z
     .any()
     .refine((files) => {
@@ -80,4 +86,5 @@ export const FormSchema = z.object({
       (files) => checkFileType(files),
       "Only .jpg, .gif, .png, .jpeg, .jfif and .webp formats are supported."
     ),
+  tags: z.array(optionSchema).min(1),
 });

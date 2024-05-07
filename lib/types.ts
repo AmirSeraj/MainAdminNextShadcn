@@ -1,4 +1,4 @@
-import { FormSchema } from "@/components/Articles/Form/FormSchema";
+import { FormSchema } from "@/schemas";
 import { UseFormReturn } from "react-hook-form";
 import * as z from "zod";
 
@@ -33,6 +33,7 @@ export interface ArticleCreateFormProps {
   summary: string;
   content: string;
   image: FileList | string;
+  tags: [];
 }
 
 export interface FormContainerProps {

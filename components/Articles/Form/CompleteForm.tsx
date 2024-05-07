@@ -2,34 +2,38 @@
 import React, { useState, useTransition } from "react";
 import { CardWrapper } from "./CardWrapper";
 import { useForm } from "react-hook-form";
-import { FormSchema } from "./FormSchema";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { submitForm } from "./action";
 import FormContainer from "./FormContainer";
+import { ArticleSchema } from "@/schemas";
 
 const CompleteForm = () => {
   const [error, setError] = useState<string | false | undefined>("");
   const [success, setSuccess] = useState<string | false | undefined>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
-  const [selectedImage, setSelectedImage] = useState<Blob | MediaSource | File | null>();
+  const [selectedImage, setSelectedImage] = useState<
+    Blob | MediaSource | File | null
+  >();
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<z.infer<typeof ArticleSchema>>({
+    resolver: zodResolver(ArticleSchema),
     defaultValues: {
       title: "",
       content: "",
       summary: "",
-      min_read: 0,
-      photo: "",
+      // min_read: 0,
+      image: "",
+      tags: [],
     },
   });
 
-  const onSubmit = (values: z.infer<typeof FormSchema>) => {
+  const onSubmit = (values: z.infer<typeof ArticleSchema>) => {
     setError("");
     setSuccess("");
     setLoading(true);
+    console.log('valuesss',values);
     startTransition(() => {
       submitForm(values).then((data) => {
         setError(data?.error);
