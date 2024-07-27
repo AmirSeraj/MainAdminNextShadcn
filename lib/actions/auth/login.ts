@@ -7,11 +7,12 @@ import { LoggedInUser } from "./loggedInUser";
 import { redirect } from "next/navigation";
 
 /**PATH */
-const sanctum_path = process.env.NEXT_PUBLIC_APP_URL_SANCTUM + "sanctum/csrf-cookie";
-const login_path = process.env.NEXT_PUBLIC_APP_URL_API + "auth/login";
+const sanctum_path = process.env.NEXT_PUBLIC_APP_URL_SANCTUM + "/sanctum/csrf-cookie";
+const login_path = process.env.NEXT_PUBLIC_APP_URL_API + "/auth/login";
 /**PATH */
 
 /**login */
+//@ts-ignore
 export const login: (values: z.infer<typeof LoginSchema>) => Promise<{
   error: string | false;
   success: string | false;

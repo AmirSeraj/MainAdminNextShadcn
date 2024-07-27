@@ -6,8 +6,8 @@ import { getSession } from "../getSession";
 
 /**PATH */
 const sanctum_path =
-  process.env.NEXT_PUBLIC_APP_URL_SANCTUM + "sanctum/csrf-cookie";
-const add_user_path = process.env.NEXT_PUBLIC_APP_URL_API + "manager/users";
+  process.env.NEXT_PUBLIC_APP_URL_SANCTUM + "/sanctum/csrf-cookie";
+const add_user_path = process.env.NEXT_PUBLIC_APP_URL_API + "/manager/users";
 /**PATH */
 
 /**add user */

@@ -3,7 +3,7 @@
 import { getSession } from "../getSession";
 
 /***PATH */
-const path = process.env.NEXT_PUBLIC_APP_URL_API + "user/edit/";
+const path = process.env.NEXT_PUBLIC_APP_URL_API + "/user/edit/";
 
 /**fetch user */
 export const EditUser = async (values: {
