@@ -7,9 +7,9 @@ const UsersPage = ({
   searchParams,
 }: {
   params: { locale: string };
-  searchParams?: {
-    query?: string;
-    page?: string;
+  searchParams: {
+    query: string;
+    page: string;
   };
 }) => {
   return (
