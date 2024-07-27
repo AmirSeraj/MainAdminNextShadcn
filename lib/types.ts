@@ -43,8 +43,8 @@ export interface FormContainerProps {
   error?: string | false;
   success?: string | false;
   loading: boolean;
-  selectedImage: Blob | MediaSource | File | null;
-  setSelectedImage: React.Dispatch<
+  selectedImage?: Blob | MediaSource | File | null;
+  setSelectedImage?: React.Dispatch<
     React.SetStateAction<File | null | Blob | MediaSource>
   >;
 }

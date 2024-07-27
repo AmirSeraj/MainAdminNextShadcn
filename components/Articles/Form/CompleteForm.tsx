@@ -55,9 +55,11 @@ const CompleteForm = () => {
         error={error}
         success={success}
         isPending={isPending}
+        //@ts-ignore
         form={form}
         loading={loading}
         selectedImage={selectedImage}
+        //@ts-ignore
         setSelectedImage={setSelectedImage}
       />
     </CardWrapper>
