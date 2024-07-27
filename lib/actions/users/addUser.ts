@@ -11,6 +11,7 @@ const add_user_path = process.env.NEXT_PUBLIC_APP_URL_API + "/manager/users";
 /**PATH */
 
 /**add user */
+//@ts-ignore
 export const addUser: (values: z.infer<typeof AddUserSchema>) => Promise<{
   error: string | false;
   success: string | false;
