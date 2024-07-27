@@ -3,12 +3,30 @@
 import { getSession } from "../getSession";
 
 /**PATH */
-const sanctum_path = process.env.NEXT_PUBLIC_APP_URL_SANCTUM + "/sanctum/csrf-cookie";
+const sanctum_path =
+  process.env.NEXT_PUBLIC_APP_URL_SANCTUM + "/sanctum/csrf-cookie";
 const path = process.env.NEXT_PUBLIC_APP_URL_API + "/manager/users?page=";
 /**PATH */
 
+interface User {
+  index: number;
+  id: number;
+  name: string;
+  profile: string;
+  email: string;
+  created_at: string;
+  status: string;
+}
+
+interface UsersResponse {
+  data: User[];
+  current_page: number;
+  last_page: number;
+  // Add other properties if needed
+}
+
 /**get users */
-export const getUsers = async (page: number) => {
+export const getUsers = async (page?: number) => {
   const session = await getSession();
   const token = session.token;
 

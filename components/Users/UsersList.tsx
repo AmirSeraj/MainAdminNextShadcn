@@ -25,25 +25,31 @@ const UsersList = async ({
   searchParams,
 }: {
   locale: string;
-  searchParams?: {
-    query?: string;
-    page?: string;
+  searchParams: {
+    query: string;
+    page: string;
   };
 }) => {
   const { t } = await initTranslations(locale, i18Namespaces);
   interface User {
+    id: number;
     index: number;
     name: string;
     profile: string;
     email: string;
     created_at: string;
     status: string;
-    last_page: number;
     current_page: number;
+    last_page: number;
   }
-  const users: { data?: User[] } = await getUsers(parseInt(searchParams?.page));
-  const current_page =
-    parseInt(searchParams?.page) || parseInt(users?.current_page);
+  // interface UserList {
+  //   users: User[];
+  //   current_page: number;
+  //   last_page: number;
+  // }
+  const users: { data: User[] } = await getUsers(parseInt(searchParams?.page));
+  //@ts-ignore
+  const current_page = parseInt(searchParams?.page) || parseInt(users?.current_page);
 
   return (
     <div className="flex flex-col">
@@ -68,17 +74,21 @@ const UsersList = async ({
         </TableCaption> */}
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[50px] text-center">{t("common:id")}</TableHead>
+              <TableHead className="w-[50px] text-center">
+                {t("common:id")}
+              </TableHead>
               <TableHead className="text-center">{t("profile")}</TableHead>
               <TableHead className="text-center">{t("name")}</TableHead>
               <TableHead className="text-center">{t("email")}</TableHead>
               <TableHead className="text-center">{t("status")}</TableHead>
               <TableHead className="text-center">{t("created_at")}</TableHead>
-              <TableHead className="text-center">{t("common:actions")}</TableHead>
+              <TableHead className="text-center">
+                {t("common:actions")}
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {users.data?.map((user: User, index: number) => (
+            {users?.data?.map((user: User, index: number) => (
               <TableRow key={index}>
                 <TableCell className="font-medium text-center">
                   {index + 1}
@@ -127,12 +137,16 @@ const UsersList = async ({
         </Table>
       </div>
       <div className="flex justify-center mt-5 items-center" dir="ltr">
-        {users?.last_page > 1 && (
-          <CustomPagination
-            totalPage={users?.last_page}
-            current_page={current_page}
-          />
-        )}
+        {
+          //@ts-ignore
+          users?.last_page > 1 && (
+            <CustomPagination
+              //@ts-ignore
+              totalPage={users?.last_page}
+              current_page={current_page}
+            />
+          )
+        }
       </div>
     </div>
   );
