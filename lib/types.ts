@@ -1,4 +1,4 @@
-import { FormSchema } from "@/schemas";
+// import { FormSchema } from "@/schemas";
 import { UseFormReturn } from "react-hook-form";
 import * as z from "zod";
 
@@ -38,7 +38,8 @@ export interface ArticleCreateFormProps {
 
 export interface FormContainerProps {
   form: UseFormReturn<ArticleCreateFormProps>;
-  onSubmit: (values: z.infer<typeof FormSchema>) => void;
+  // onSubmit: (values: z.infer<typeof FormSchema>) => void;
+  onSubmit: any;
   isPending: boolean;
   error?: string | false;
   success?: string | false;

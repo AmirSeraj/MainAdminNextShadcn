@@ -47,10 +47,10 @@ export const EditUserSchema = z.object({
 });
 
 const MAX_FILE_SIZE = 5242880;
-function checkFileType(files: File) {
+function checkFileType(files: FileList) : boolean {
   // file type checking
-  if (files?.[0]?.name) {
-    const fileType = files?.[0]?.name.split(".").pop();
+  if (files.length > 0) {
+    const fileType = files[0].name.split(".").pop() ?? "";
     if (["gif", "png", "jpg", "jpeg", "jfif", "webp"].includes(fileType))
       return true;
   }

@@ -4,7 +4,8 @@ import { LoginSchema } from "@/schemas";
 import * as z from "zod";
 import { getSession } from "@/lib/actions/getSession";
 import { redirect } from "next/navigation";
-import { FormSchema } from "./FormSchema";
+import { LoggedInUser } from "@/lib/actions/auth/loggedInUser";
+// import { FormSchema } from "./FormSchema";
 
 /**PATH */
 const sanctum_path = process.env.NEXT_APP_URL + "sanctum/csrf-cookie";
@@ -12,7 +13,9 @@ const login_path = process.env.NEXT_APP_URL + "api/auth/login";
 /**PATH */
 
 /**login */
-export const submitForm: (values: z.infer<typeof FormSchema>) => Promise<{
+// export const submitForm: (values: z.infer<typeof FormSchema>) => Promise<{
+//@ts-ignore  
+export const submitForm: (values: any) => Promise<{
   error: string | false;
   success: string | false;
   // isLoading: false;
