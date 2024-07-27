@@ -11,7 +11,7 @@ import { EditUser } from "@/lib/actions/users/editUser";
 
 const UserEdit = () => {
   const router = usePathname();
-  const editId = router.split("/").pop();
+  const editId = router.split("/").pop() ?? "";
   const [user, setUser] = useState<[] | any>([]);
   const [error, setError] = useState<string | false>("");
   const [success, setSuccess] = useState<string | false>("");
@@ -38,8 +38,9 @@ const UserEdit = () => {
     setError("");
     setSuccess("");
 
+    //@ts-ignore
     startTransition(() => {
-      EditUser(values).then((data) => {
+      EditUser({ values }).then((data) => {
         setError(data?.error);
         setSuccess(data?.success);
       });
@@ -48,6 +49,7 @@ const UserEdit = () => {
 
   return (
     <CardWrapper
+      //@ts-ignore
       title={t("add_new_user")}
       form={form}
       onSubmit={onSubmit}

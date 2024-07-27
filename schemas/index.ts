@@ -44,10 +44,11 @@ export const EditUserSchema = z.object({
   name: z.string().min(1, {
     message: "Name is required!",
   }),
+  id: z.number(),
 });
 
 const MAX_FILE_SIZE = 5242880;
-function checkFileType(files: FileList) : boolean {
+function checkFileType(files: FileList): boolean {
   // file type checking
   if (files.length > 0) {
     const fileType = files[0].name.split(".").pop() ?? "";
