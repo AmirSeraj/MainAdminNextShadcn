@@ -6,7 +6,7 @@ import {
 } from "react-icons/md";
 import { ImProfile } from "react-icons/im";
 
-const MenuItems = (t) => {
+const MenuItems = (t:any) => {
   return [
     {
       title: t("pages"),
