@@ -40,25 +40,21 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 resources: https://ui.shadcn.com/docs/components/form
 
 ## Installations
-
+```
 npx shadcn-ui@latest add form
 npx shadcn-ui@latest add button
-
+```
 ## folder structure (in next.js 14 App router):
-
+```
 app/(auth)/login/page.tsx
-
 app/(auth)/register/page.tsx
-
 components/auth/RegisterForm.tsx
-
 components/auth/Social.tsx
-
+```
 ## in register page:
-
+```
 import RegisterForm from '@/components/auth/RegisterForm'
 import React from 'react'
-
 const RegisterPage = () => {
 return (
 <RegisterForm />
@@ -66,10 +62,11 @@ return (
 }
 
 export default RegisterPage
-
+```
 ## Social.tsx: components/auth/Social.tsx
-
+```
 "use client";
+
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { Button } from "../ui/button";
@@ -98,9 +95,10 @@ const Social = () => {
 };
 
 export default Social;
+```
 
 ## Header.tsx : components/auth/Header.tsx
-
+```
 import { Poppins } from "next/font/google";
 import clsx from "clsx";
 
@@ -122,5 +120,6 @@ export const Header = ({ label, title }: HeaderProps) => {
     </div>
   );
 };
+```
 
 
