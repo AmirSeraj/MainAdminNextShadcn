@@ -47,8 +47,11 @@ npx shadcn-ui@latest add button
 ## folder structure (in next.js 14 App router):
 
 app/(auth)/login/page.tsx
+
 app/(auth)/register/page.tsx
+
 components/auth/RegisterForm.tsx
+
 components/auth/Social.tsx
 
 ## in register page:
