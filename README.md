@@ -40,6 +40,7 @@ npx shadcn-ui@latest add form
 npx shadcn-ui@latest add button
 npm i @radix-ui/react-icons
 pnpm dlx shadcn-ui@latest add card
+pnpm dlx shadcn-ui@latest add input
 ```
 
 ## folder structure (in next.js 14 App router):
