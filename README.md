@@ -39,6 +39,7 @@ resources: https://ui.shadcn.com/docs/components/form
 npx shadcn-ui@latest add form
 npx shadcn-ui@latest add button
 npm i @radix-ui/react-icons
+pnpm dlx shadcn-ui@latest add card
 ```
 
 ## folder structure (in next.js 14 App router):
