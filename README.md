@@ -280,7 +280,7 @@ export const FormSuccess = ({ message }: FormSuccessProps) => {
 
 ```
 
-## RegisterFormServerSide.tsx : components/Form/RegisterFormServerSide.tsx
+## RegisterFormServerSide.tsx : components/auth/RegisterFormServerSide.tsx
 
 ```
 import React from "react";
@@ -433,7 +433,7 @@ const RegisterFormServerSide = ({
 export default RegisterFormServerSide;
 ```
 
-## RegisterForm.tsx : components/Form/RegisterForm.tsx
+## RegisterForm.tsx : components/auth/RegisterForm.tsx
 
 ```
 "use client";
