@@ -36,6 +36,7 @@ resources: https://ui.shadcn.com/docs/components/form
 ## Installations
 
 ```
+npx shadcn-ui@latest init
 npx shadcn-ui@latest add form
 npx shadcn-ui@latest add button
 npm i @radix-ui/react-icons
