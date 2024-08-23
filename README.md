@@ -797,10 +797,10 @@ export const login: (values: z.infer<typeof LoginSchema>) => Promise<{
   }
 };
 ```
-## -------------------------------------------------------------------------------------------------------------
-## Add persian fonts to Next project
+# -------------------------------------------------------------------------------------------------------------
+# Add persian fonts to Next project
 
-# In the main directory create a folder lib/IranSans.js or utils/IranSans.js and paste the bellow code in the file
+## In the main directory create a folder lib/IranSans.js or utils/IranSans.js and paste the bellow code in the file
 
 ```
 import localFont from "next/font/local";
@@ -838,9 +838,9 @@ export const IranSans = localFont({
 
 ```
 
-# Put fonts folder in public folder
+## Put fonts folder in public folder
 
-# in layout file add font to project
+## in layout file add font to project
 
 ```
 // import { Noto_Sans_Arabic } from "next/font/google";
