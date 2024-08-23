@@ -797,3 +797,91 @@ export const login: (values: z.infer<typeof LoginSchema>) => Promise<{
   }
 };
 ```
+
+##Add persian fonts to Next project
+
+#In the main directory create a folder lib/IranSans.js or utils/IranSans.js and paste the bellow code in the file
+
+```
+import localFont from "next/font/local";
+
+export const IranSans = localFont({
+  src: [
+    {
+      path: "../public/fonts/IranSans/IRANSansWeb(FaNum)_UltraLight.woff",
+      // path: "",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/IranSans/IRANSansWeb(FaNum)_Light.woff",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/IranSans/IRANSansWeb(FaNum).woff",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/IranSans/IRANSansWeb(FaNum)_Medium.woff",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/IranSans/IRANSansWeb(FaNum)_Bold.woff",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+});
+
+```
+
+#Put fonts folder in public folder
+
+#in layout file add font to project
+
+```
+// import { Noto_Sans_Arabic } from "next/font/google";
+import { NextUIProvider } from "@nextui-org/system";
+import "./globals.css";
+import clsx from "clsx";
+import Header from "./components/Header/header";
+import { IranSans } from "@/utils/IranSans";
+
+export const metadata = {
+  title: "فروشگاه من",
+  description: "Store",
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
+
+// const arabic = Noto_Sans_Arabic({
+//   subsets: ["arabic"],
+//   variable: "--font-sans-arabic",
+//   weight: ["400", "700"],
+//   style: ["normal"],
+//   display: "swap",
+// });
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="fa" dir="rtl" suppressHydrationWarning>
+      <body
+        className={clsx(
+          IranSans.className,
+          "min-h-screen h-screen w-full bg-[#fff]"
+        )}
+      >
+        <NextUIProvider>
+          <Header />
+          <main>{children}</main>
+        </NextUIProvider>
+      </body>
+    </html>
+  );
+}
+
+```
